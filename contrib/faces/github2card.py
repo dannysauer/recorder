@@ -2,20 +2,20 @@
 
 # github2card.py
 # Copyright (C) 2016 Jan-Piet Mens <jpmens@gmail.com>
-# 
+#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# along with this program; if not, write to the Free Software Foundation, Inc.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Usage: github2card username
 #
@@ -25,17 +25,19 @@
 #
 # You probably want to do this:
 #
-# github2card.py jjolie  > card.json
+# github2card.py jjolie > card.json
 # mosquitto_pub -t owntracks/jane/phone/info -r -f card.json
 #
 # Note: the two commands cannot be piplelined (mosquitto_pub -l)
-# because of a bug in mosquitto_pub: https://bugs.eclipse.org/bugs/show_bug.cgi?id=478917
+# because of a bug in mosquitto_pub:
+#  https://bugs.eclipse.org/bugs/show_bug.cgi?id=478917
 # If you have a newer version it should work fine.
 
 import requests
 import base64
 import json
 import sys
+
 
 def user_profile(username):
     url = "https://api.github.com/users/" + username
@@ -71,8 +73,8 @@ def user_profile(username):
 
     card = {
         '_type': 'card',
-        'name' : name,
-        'face' : base64.b64encode(r.content).decode('utf-8')
+        'name':  name,
+        'face':  base64.b64encode(r.content).decode('utf-8')
     }
 
     print(json.dumps(card))
